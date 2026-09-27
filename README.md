@@ -115,15 +115,49 @@ The frontend will run on `http://localhost:5173`.
 
 **Note:** The refresh token is sent both as an httpOnly cookie (for the browser frontend) and in the JSON response body (to make testing with tools like Postman/Thunder Client easier, since some HTTP clients don't reliably persist cookies across requests).
 
-### Products
+## Project Structure
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| POST | `/api/products` | Authenticated | Create a new product |
-| GET | `/api/products` | Public | List all products |
-| GET | `/api/products/:id` | Public | Get a single product by ID |
-| PUT | `/api/products/:id` | Authenticated | Update a product |
-| DELETE | `/api/products/:id` | Authenticated | Delete a product |
+```
+COHORT ASSIGMENT/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   └── product.controller.js
+│   ├── middlewares/
+│   │   ├── auth.middleware.js
+│   │   └── validate.middleware.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Product.js
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   └── product.routes.js
+│   ├── utils/
+│   │   └── generateTokens.js
+│   ├── validators/
+│   │   ├── auth.validator.js
+│   │   └── product.validator.js
+│   ├── .env.example
+│   └── server.js
+└── frontend/
+    ├── src/
+    │   ├── api/
+    │   │   └── axios.js
+    │   ├── components/
+    │   │   ├── Navbar.jsx
+    │   │   └── ProductForm.jsx
+    │   ├── context/
+    │   │   └── AuthContext.jsx
+    │   ├── pages/
+    │   │   ├── Login.jsx
+    │   │   ├── Register.jsx
+    │   │   └── Products.jsx
+    │   ├── App.jsx
+    │   └── main.jsx
+    └── vite.config.js
+```
 
 **Product fields:** `name`, `description`, `price`, `stock`, `category` (Electronics, Clothing, Books, Home & Kitchen, Beauty, Sports, Toys, Other), `imageUrl`
 
