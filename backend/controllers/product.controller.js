@@ -3,13 +3,15 @@ const mongoose = require("mongoose");
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, stock } = req.body;
+    const { name, description, price, stock, category, imageUrl } = req.body;
 
     const product = await Product.create({
       name,
       description,
       price,
       stock,
+      category,
+      imageUrl,
       createdBy: req.user.id,
     });
     res.status(201).json(product);
@@ -56,11 +58,13 @@ exports.updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Product Not Found" });
     }
 
-    const { name, description, price, stock } = req.body;
+    const { name, description, price, stock, category, imageUrl } = req.body;
     if (name !== undefined) product.name = name;
     if (description !== undefined) product.description = description;
     if (price !== undefined) product.price = price;
     if (stock !== undefined) product.stock = stock;
+    if (category !== undefined) product.category = category;
+    if (imageUrl !== undefined) product.imageUrl = imageUrl;
 
     await product.save();
     res.status(200).json(product);

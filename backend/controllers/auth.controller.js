@@ -60,9 +60,9 @@ exports.login = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -105,7 +105,6 @@ exports.refreshToken = async (req, res) => {
     try {
       decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
     } catch (err) {
-      console.log("JWT VERIFY ERROR:", err.name, "-", err.message); // TEMP DEBUG
       return res
         .status(403)
         .json({ message: "Invalid or expired refresh token" });

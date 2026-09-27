@@ -11,28 +11,34 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow px-6 py-4 flex justify-between items-center">
-      <Link to="/products" className="text-xl font-bold text-blue-600">
-        MyShop
+    <nav className="bg-gray-900 text-white px-6 py-3 flex justify-between items-center shadow-md">
+      <Link
+        to="/products"
+        className="text-2xl font-bold text-orange-400 tracking-tight"
+      >
+        ShopKart
       </Link>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-5 items-center text-sm">
         {user ? (
           <>
-            <span className="text-gray-700">Hi, {user.name}</span>
+            <span className="text-gray-300">Hi, {user.name}</span>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              className="bg-orange-500 px-4 py-1.5 rounded font-medium hover:bg-orange-600 transition"
             >
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="text-blue-600">
+            <Link to="/login" className="hover:text-orange-400 transition">
               Login
             </Link>
-            <Link to="/register" className="text-blue-600">
-              Register
+            <Link
+              to="/register"
+              className="bg-orange-500 px-4 py-1.5 rounded font-medium hover:bg-orange-600 transition"
+            >
+              Sign Up
             </Link>
           </>
         )}
